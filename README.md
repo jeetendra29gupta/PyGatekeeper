@@ -48,16 +48,20 @@ def password():
     try:
         pm = PasswordManager()
 
-        hashed = pm.hash_password("mysecurepassword")
-        print(f"Password hashed: {hashed}")
+        my_password = "mysecurepassword"
+        hashed = pm.hash_password(my_password)
+        print(f"Original Password: {my_password}")
+        print(f"Hashed Password: {hashed}")
 
-        assert pm.verify_password("mysecurepassword", hashed)
-        if pm.verify_password("mysecurepassword", hashed):
-            print("Password is valid.")
+        correct_password = "mysecurepassword"
+        assert pm.verify_password(correct_password, hashed)
+        if pm.verify_password(correct_password, hashed):
+            print(correct_password, " is valid.")
 
-        assert not pm.verify_password("wrongpassword", hashed)
-        if not pm.verify_password("wrongpassword", hashed):
-            print("Password is invalid.")
+        wrong_password = "wrongpassword"
+        assert not pm.verify_password(wrong_password, hashed)
+        if not pm.verify_password(wrong_password, hashed):
+            print(wrong_password, " is invalid.")
 
     except PasswordError as e:
         print(f"Password error: {e}")
